@@ -1,4 +1,7 @@
 /*
+
+Problem : https://www.interviewbit.com/problems/rain-water-trapped/
+
 Rain Water Trapped
 Given n non-negative integers representing an elevation
 map where the width of each bar is 1,
@@ -20,42 +23,13 @@ Explaination 1:
 
 */
 
-#include<bits/stdc++.h>
+int Solution::trap(const vector<int> &a) {
 
-using namespace std;
-
-typedef long long int ll;
-
-typedef pair<int, int> pi;
-
-#define all(x) (x).begin(), (x).end()
-
-#define endl "\n"
-
-#define pb push_back
-
-#define mp make_pair
-
-#define F first
-
-#define S second
-
-#define ar array
-
-#define IOS ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-
-const ll mod = 1e9 + 7;
-const ll inf = 2e9 + 5;
-double PI = 3.14159265358979323846;
-
-void solve() {
-
-    int n;
-    cin >> n;
-    vector<int> a(n);
-    for (int i = 0; i < n; i++) {
-        cin >> a[i];
+    if (a.size() == 0) {
+        return 0;
     }
+
+    int n = a.size();
 
     vector<int> prefixMax(n + 5, 0);
     vector<int> suffixMax(n + 5, 0);
@@ -73,15 +47,5 @@ void solve() {
             ans += x - a[i];
         }
     }
-    cout << ans << endl;
-
-}
-
-int32_t main()
-{
-    IOS
-    // int T; cin >> T; while (T--)
-    solve();
-    return 0;
-}
-
+    
+    return ans;
