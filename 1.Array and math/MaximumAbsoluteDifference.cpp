@@ -1,5 +1,29 @@
 // https://www.interviewbit.com/problems/maximum-absolute-difference/
 
+/*
+
+Case 1: A[i] > A[j] and i > j
+|A[i] - A[j]| = A[i] - A[j]
+|i -j| = i - j
+hence, f(i, j) = (A[i] + i) - (A[j] + j)
+
+Case 2: A[i] < A[j] and i < j
+|A[i] - A[j]| = -(A[i]) + A[j]
+|i -j| = -(i) + j
+hence, f(i, j) = -(A[i] + i) + (A[j] + j)
+
+Case 3: A[i] > A[j] and i < j
+|A[i] - A[j]| = A[i] - A[j]
+|i -j| = -(i) + j
+hence, f(i, j) = (A[i] - i) - (A[j] - j)
+
+Case 4: A[i] < A[j] and i > j
+|A[i] - A[j]| = -(A[i]) + A[j]
+|i -j| = i - j
+hence, f(i, j) = -(A[i] - i) + (A[j] - j)
+
+*/
+
 const int inf = 1e9;
 
 int Solution::maxArr(vector<int> &a) {
