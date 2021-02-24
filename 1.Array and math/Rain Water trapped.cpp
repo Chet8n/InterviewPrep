@@ -51,3 +51,44 @@ int Solution::trap(const vector<int> &a) {
     return ans;
    
 }
+
+
+/*
+    O(1) space complexity and O(n) time complexity solution
+*/
+
+int Solution::trap(const vector<int> &a) {
+
+    if (a.size() == 0) {
+        return 0;
+    }
+
+    int n = a.size();
+
+    int leftmx = 0;
+    int rightmx = 0;
+
+    int index = -1;
+    int biggest = -1;
+
+    for (int i = 0; i < n; i++) {
+        if (a[i] > biggest) {
+            biggest = a[i];
+            index = i;
+        }
+    }
+
+    int ans = 0;
+
+    for (int i = 0; i < index; i++) {
+        ans += max(0, min(leftmx, biggest) - a[i]);
+        leftmx = max(leftmx , a[i]);
+    }
+
+    for (int i = n - 1; i > index; i--) {
+        ans += max(0, min(biggest, rightmx) - a[i]);
+        rightmax = max(rightmx, a[i]);
+    }
+
+    return ans;
+}
