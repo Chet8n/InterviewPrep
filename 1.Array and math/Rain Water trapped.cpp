@@ -49,3 +49,5 @@ int Solution::trap(const vector<int> &a) {
     }
     
     return ans;
+   
+}
