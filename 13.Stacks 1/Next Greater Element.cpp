@@ -22,8 +22,11 @@ d) For the input array [13, 7, 6, 12}, the next greater elements for each elemen
 
 
 */
-int Solution::solve(vector<int> &a) {
-    /**
+
+
+vector<int> Solution::nextGreater(vector<int> &a) {
+   
+   /**
 
     - getting the next greater element from thr array
     - [1 3 5 2 6 8 3 9]
@@ -35,7 +38,7 @@ int Solution::solve(vector<int> &a) {
     - for the all the elements removed cur_element is the next greater element
 
     **/
-
+    
     int n = a.size();
     stack<int> s;
     vector<int> ans(n);
@@ -51,5 +54,6 @@ int Solution::solve(vector<int> &a) {
         ans[s.top()] = -1;
         s.pop();
     }
-
+    
+    return ans;
 }
