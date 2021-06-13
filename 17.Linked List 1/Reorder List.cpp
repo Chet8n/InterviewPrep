@@ -70,53 +70,51 @@ ListNode* Solution::reorderList(ListNode* a) {
         return a;
     }
 
-    ListNode *mid = a;
-    ListNode *fp = a;
-    ListNode *prev = NULL;
+    // step 1 : Find the mid point
+    // this method will have frst part length <= second part length
 
-    while (fp != NULL and fp->next != NULL) {
-        prev = mid;
-        mid = mid->next;
-        fp = fp->next->next;
+    ListNode *fast = a;
+    ListNode *slow = a;
+
+    ListNode *prev;
+
+    while (fast and fast->next) {
+        prev = slow;
+        slow = slow->next;
+        fast = fast->next->next;
     }
 
-    // now we have mid point, now make 2 seperate linked list,
-    // from head to mid and mid->next to tail, and reverse the later
-    // such that it is from tail to mid->next
-    // then alternately pick from each linked list
+    // step 2 : reverse the List from slow to end of Linked List
 
+    ListNode *cur = slow;
     prev->next = NULL;
     prev = NULL;
-    ListNode *scur = mid;
-    ListNode *sprev = NULL;
-    ListNode *snext = scur->next;
+    ListNode *next;
 
-    while (scur) {
+    while (cur) {
+        next = cur->next;
+        cur->next = prev;
+        prev = cur;
+        cur = next;
+    }
+
+    // step 3 : Get the reqd order:
+
+    ListNode *scur = prev;
+    cur = a;
+    ListNode *snext;
+
+    while (cur and scur) {
+        next = cur->next;
+        cur->next = scur;
         snext = scur->next;
-        scur->next = sprev;
-        sprev = scur;
+        if (next)
+            scur->next = next;
+
+        cur = next;
         scur = snext;
     }
 
-    ListNode *shead = sprev;
-    scur = sprev;
-    ListNode *cur = a;
-    ListNode *temp;
-    ListNode *stemp;
-
-    while (cur and scur) {
-        prev = cur;
-        sprev = scur;
-        temp = cur->next;
-        stemp = scur->next;
-
-        cur->next = scur;
-        if (temp)
-            scur->next = temp;
-        cur = temp;
-        scur = stemp;
-
-    }
-
     return a;
+
 }
