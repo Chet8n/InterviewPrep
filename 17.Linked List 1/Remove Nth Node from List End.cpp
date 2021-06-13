@@ -70,43 +70,35 @@ In the second example, 1 is the first and the last element.
  */
 ListNode* Solution::removeNthFromEnd(ListNode* a, int b) {
 
-    ListNode *p1 = a;
-    ListNode *p2 = a;
+    // keeping 2 pointers at p1 and p2
+    ListNode * p1 = a;
+    ListNode * p2 = a;
 
-    // just in case given list is empty
-
+    // incase the List is empty
     if (a == NULL) {
         return a;
     }
 
-    int index = 1;
-    while (index <= b and p2 != NULL) {
+    while (b-- and p2) {
         p2 = p2->next;
-        index++;
     }
 
-    // if the pointer p1 == NULL then we have to remove frst element
-    // coz it means either nth element from last is either frst element
-    // or it doesnt exists
+    // if p2 is NULL have to remove the frst element
     if (p2 == NULL) {
         return a->next;
     }
 
-    // now move both pointers together
-
-    while (p2->next != NULL) {
+    // Now lets move both pointers together
+    while (p2->next) {
         p2 = p2->next;
         p1 = p1->next;
     }
 
-    // gotta remove p1->next coz that is the kth element from last
-
-    ListNode *temp = p1->next;
-    p1->next = temp->next;
-    free(temp);
+    ListNode * toRemove = p1->next;
+    p1->next = toRemove->next;
+    free(toRemove);
 
     return a;
-
 }
 /*
 
@@ -130,4 +122,5 @@ ListNode* Solution::removeNthFromEnd(ListNode* head, int n) {
 }
 
 */
+
 
